@@ -1,0 +1,37 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+<h1 class="heading">Login</h1>
+<!--<p class="description">Edit Movie Rating</p>-->
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger">{{ message }}
+        {% endfor %}
+        </div>
+<form method="post", action="{{ url_for('login') }}">
+  {{ form.csrf_token }}
+  <table>
+    <tr>
+      <td class="login_label">{{ form.email.label }}</td>
+      <td class="login_td">{{ form.email }}</td>
+    </tr>
+    <tr>
+      <td class="login_label">{{ form.password.label }}</td>
+      <td class="login_td">{{ form.password }}</td>
+    </tr>
+  </table>
+
+  {{ form.submit }}
+</form>
+
+{% endblock %}

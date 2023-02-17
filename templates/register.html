@@ -1,0 +1,50 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% from "bootstrap/wtf.html" import quick_form %}
+
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Register User{% endblock %}
+
+{% block content %}
+
+<div class="content">
+    <h1 class="heading">Register User</h1><br>
+
+
+   <form action="{{ url_for('register') }}" method="POST">
+    {{ user_form.id() }}<br>
+
+      <table>
+    <tr>
+      <td class="login_label">{{user_form.name.label}}</td>
+      <td class="login_td">{{ user_form.name() }}</td>
+    </tr>
+    <tr>
+      <td class="login_label">{{user_form.email.label}}</td>
+      <td class="login_td">{{ user_form.email() }}</td>
+    </tr>
+    <tr>
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger">{{ message }}
+        {% endfor %}
+        </div>
+      <td class="login_label">{{user_form.password.label}}</td>
+      <td class="login_td">{{ user_form.password() }}</td>
+    </tr>
+       <tr>
+      <td class="login_label">{{user_form.confirm.label}}</td>
+      <td class="login_td">{{ user_form.confirm() }}</td>
+    </tr>
+  </table>
+    {{ user_form.submit() }}<br>
+    </form>
+</div>
+
+{% endblock %}
